@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Softball League localstorage</title>
+<link rel="stylesheet" type="text/css" href="softball.css" />
+<script src="jquery-1.4.4.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="jquery.reveal.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
+<script type="text/javascript" src="jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="jquery.hoverIntent.minified.js"></script>
+<script type="text/javascript" src="jquery.naviDropDown.1.0.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+     $('#myButton').click(function(e) {
+          e.preventDefault();
+    $('#myModal').reveal({dismissmodalclass: 'close-reveal-modal'});
+     });
+$('#navigation_horiz').naviDropDown({
+        dropDownWidth: '300px'
+    });
+ $(':text:first').focus();
+      $("#myTeam").validate();
+      var Teams = new Array ();
+      
+    var Team = function(team, manager, cell, add1, add2, city, st, zip, sponsor) {
+      this.team = team;
+      this.manager = manager;
+      this.cell = cell;
+      this.add1 = add1;
+      this.add2 = add2;
+      this.city = city;
+      this.st = st;
+      this.zip = zip;
+      this.sponsor = sponsor;
+      this.runName = function () {
+        return this.team;
+      }
+    };
+    
+    var input_name = "";
+    function init() {
+      $('#myTeam').each, function() {
+        input_name = $(this).attr('name');
+        if (localStorage[input_name]) {
+          $(this).val(localStorage[input_name]);
+        }; //end of if
+      };
+      }; //end of init func
+      
+      
+      var newTeam = $('#myTeam > input[type="submit"]').bind('click', function(event) {
+         //   teams.push (new Team($('#team').val(), $('#manager').val(), $('#cell').val(), $('#add1').val(), $('#add2').val(), $('#city').val(), $('#st').val(), $('#zip').val(), $('#sponsor').val()));
+          //  console.log(teams)
+           //init();
+           event.preventDefault();
+         }); //end of event  and click function
+
+    console.log($('#myTeam').attr('name'))
+    //console.log(Team[2].id)
+  //  var newTeam = $('input[type="submit"]').bind('click', function(event) {
+  //    new Team($('#team').val(), $('#manager').val(), $('#cell').val(), $('#add1').val(), $('#add2').val(), $('#city').val(), $('#st').val(), $('#zip').val(), $('#sponsor').val());
+  //  event.preventDefault();
+ //   }); //end of newTeam
+    
+    //for (var i = 0; i < teams.length; i++) {
+//    var newTeam = $('input[type="submit"]').bind('click', function(event) {
+//      for (var key in Team) {
+//        Teams.push(localStorage["league." + i + "." + key] = $('#' + key).val())
+//      }
+//     event.preventDefault();
+//});
+    
+   // function saveTeam() {
+   //   for (var i = 0; i < Team.length; i++) {
+   //     localStorage["league." + i "." + team ] = $('#team').val()
+   //   }//for loop
+      
+  //  }//saveTeam
+
+//function saveGameState() {
+//    if (!supportsLocalStorage()) { return false; }
+//    localStorage["halma.game.in.progress"] = gGameInProgress;
+//    for (var i = 0; i < kNumPieces; i++) {
+//	localStorage["halma.piece." + i + ".row"] = gPieces[i].row;
+//	localStorage["halma.piece." + i + ".column"] = gPieces[i].column;
+//    }
+//    localStorage["halma.selectedpiece"] = gSelectedPieceIndex;
+//    localStorage["halma.selectedpiecehasmoved"] = gSelectedPieceHasMoved;
+//    localStorage["halma.movecount"] = gMoveCount;
+//    return true;
+//}
+
+    
+ }); //end of jquery
+
+</script>
+</head>
+
+<body>
+<div id="headerbox">
+<header>
+<div id="navigation_horiz">
+<ul id="nav">
+<li>
+					<a href="samsoftball2b.html#topbox"><h1>SUPER SOFTBALL LEAGUE</h1></a>
+          <a><img src="downarrow.jpg" style="border:none; padding-left:70px; width: 20px; height: 20px"></img></a>
+					<div id="dropdown_one" class="dropdown">
+						
+<a href="samsoftball2b.html#box1">STANDINGS</a><br>
+<a href="samsoftball2b.html#box3">SCHEDULE</a><br>
+</div><!--<div id="dropdown_one"-->
+				</li>
+
+</ul>
+</div><!--/id="navigation_horiz">-->
+</header>
+
+<img src="banner.png"/>
+<div style="clear: both;"></div>
+
+</div>
+<div id="content">
+
+
+<div id="box1">
+	<h2>Standings</h2>
+<div id="box2">	
+
+<div id="team">
+<h3>Team</h3>
+<p class="team"></p>
+<p class="team"></p>
+<p class="team"></p>
+<p class="team"></p>
+</div>
+<div id="win">
+<h3>Wins</h3>
+<p class="win"></p>
+<p class="win"></p>
+<p class="win"></p>
+<p class="win"></p>
+</div>
+<div id="lose">
+<h3>Loses</h3>
+<p class="lose"></p>
+<p class="lose"></p>
+<p class="lose"></p>
+<p class="lose"></p>
+</div>
+<div id="percent">
+<h3>Percentage</h3>
+<p class="percent"></p>
+<p class="percent"></p>
+<p class="percent"></p>
+<p class="percent"></p>
+</div>
+<div style="clear: both;"></div>
+
+</div><!--/box2-->
+</div><!--/box1-->
+
+<div id="box3">
+	<h2>Schedule</h2>
+<div id="box4">
+
+<div id="week">
+<h3>Week 1</h3>
+<p class="row2">Some event</p>
+<p class="row2"></p>
+</div>
+<div id="week">
+<h3>Week 2</h3>
+<p class="row2">Some event</p>
+<p class="row2"></p>
+</div>
+<div id="week">
+<h3>Week 3</h3>
+<p class="row2">Some event</p>
+<p class="row2"></p>
+</div>
+<div id="week">
+<h3>Week 4</h3>
+<p class="row2">Some event</p>
+<p class="row2"></p>
+</div>
+<div id="week">
+<h3>Week 5</h3>
+<p class="row2">Some event</p>
+<p class="row2"></p>
+</div>
+<div id="week">
+<h3>Week 6</h3>
+<p class="row2">Some event</p>
+<p class="row2"></p>
+</div>
+<div style="clear: both;"></div>
+</div><!--/box4-->
+</div><!--/box3-->
+
+<a id= "submitbutton" href="samsoftball2b.html#" data-reveal-id="myModal">Add Team</a>
+<div id="myModal" class="reveal-modal">
+			<a href="samsoftball2b.html#"></a>
+			<div align="left" id="myForm">
+  <header class="myhead">
+    
+  </header>
+    
+  
+    <form action="http://www.nashvillesoftwareschool.com/ftp/campbellm/Softball%20League/newTeam" method="post" target="_self" id="myTeam" name="myTeam">
+    <fieldset>
+      <legend>Team info</legend>
+      <ol>
+       <li>
+         <label for"team">Team name:<em>*</em></label><br />
+         <input name="team" id="team" class="stored" type="text" value="Your team name here" size="50" maxlength="255" class="required"/>
+       </li>
+       <li>
+         <label for"manager">Manager name:<em>*</em></label><br />
+         <input name="manager" id="manager" class="stored" type="text" value="Mgr's name here" size="50" maxlength="255" class="required"/>
+       </li>  
+       <li>
+         <label for"cell">Mgr cell number:<em>*</em></label><br />
+         <input name="cell" id="cell" class="stored" type="text" value="xxx-xxx-xxxx" size="50" maxlength="12" required="required"/>
+       </li>  
+       <li>
+         <label for"add1">Mgr street address 1:<em>*</em></label><br />
+         <input name="add1" id="add1" class="stored" type="text" value="Main address here" size="50" maxlength="155" required="required"/>
+       </li>  
+       <li>
+         <label for"add2">Mgr street address 2:</label><br />
+         <input name="add2" id="add2" class="stored" type="text" value="Secondary address here" size="50" maxlength="155"/>
+       </li>  
+       <li>
+         <label for"city">Mgr city:<em>*</em></label><br />
+         <input name="city" id="city" class="stored" type="text" value="City address here" size="50" maxlength="155" required="required"/>
+       </li>  
+       <li>
+         <label for"st">Mgr state:<em>*</em></label><br />
+         <input name="st" id="st" class="stored" type="text" value="St" size="50" maxlength="2" required="required"/>
+       </li>  
+       <li>
+         <label for"zip">Mgr ZIP:<em>*</em></label><br />
+         <input name="zip" id="zip" class="stored" type="text" value="ZIP add" size="50" maxlength="10" required="required"/>
+       </li>  
+       <li>
+         <label for"sponsor">Team sponsor:</label><br />
+         <input name="sponsor" id="sponsor" class="stored" type="text" value="Sponsor name here" size="50" maxlength="155"/>
+       </li>  
+      </ol>
+      </fieldset>
+      
+      <fieldset>
+        <legend>Credit card info</legend>
+          <ol>
+            <li>
+              <label for"teamCard">Card type:<em>*</em></label>            
+              <input name="teamCard" id="teamCard" class="stored" type="radio" value="Visa" checked="" />Visa<br />
+              <input name="teamCard" id="teamCard" class="stored" type="radio" value="MasterCar"  />MasterCard<br />
+              <input name="teamCard" id="teamCard" class="stored" type="radio" value="AmEx"  />AmEx<br />
+            </li>
+            
+            <li>
+              <label for"teamCardNo">Card number:<em>*</em></label><br />
+              <input name="teamCardNo" id="teamCardNo" class="stored" type="text" value="XXXX-XXXX-XXXX-XXXX" size="19" maxlength="19" required="required"/>
+            </li>
+            <li>
+              <label for"teamCardExp">Card expiry:<em>*</em></label><br />
+              <input name="teamCardExp" id="teamCardExp" class="stored" type="text" value="XX/XX" size="5" maxlength="5" required="required"/>
+            </li>
+             
+          </ol>
+      </fieldset>
+      
+      <fieldset>
+       <input  name="newTeam" value="New team" type="submit" />
+        <p><em>*</em>  indicates required.</p>
+      </fieldset>
+    </form>
+  
+  
+  
+  
+  
+    
+</div> <!--container -->
+
+<a class="close-reveal-modal">x</a>
+</div><!--/content-->
+
+</body>
+</html>

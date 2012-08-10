@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Softball League</title>
+<link rel="stylesheet" type="text/css" href="softball.css" />
+<script src="jquery-1.4.4.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="jquery.reveal.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
+<script type="text/javascript" src="jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="jquery.hoverIntent.minified.js"></script>
+<script type="text/javascript" src="jquery.naviDropDown.1.0.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+     $('#myButton').click(function(e) {
+          e.preventDefault();
+    $('#myModal').reveal({dismissmodalclass: 'close-reveal-modal'});
+     });
+$('#navigation_horiz').naviDropDown({
+        dropDownWidth: '300px'
+    });
+ $(':text:first').focus();
+      $("#myTeam").validate();
+      
+    var Team = function(team, manager, cell, add1, add2, city, st, zip, sponsor) {
+      this.team = team;
+      this.manager = manager;
+      this.cell = cell;
+      this.add1 = add1;
+      this.add2 = add2;
+      this.city = city;
+      this.st = st;
+      this.zip = zip;
+      this.sponsor = sponsor;
+      this.runName = function () {
+        return this.team;
+      }
+    };
+    
+     var bigArray = new Array ();
+     var teams = new Array ();
+     var toBeSorted = new Array ();
+     var nameSort = new Array ();
+     var sked = new Array ();
+     
+      // bigArray = bigArray + new Team()
+     //$('teamName').val()
+     
+     function bubbleSort(a)
+{
+    var swapped;
+    do {
+        swapped = false;
+        for (var i=0; i < a.length-1; i++) {
+            if (a[i] > a[i+1]) {
+                var temp = a[i];
+                a[i] = a[i+1];
+                a[i+1] = temp;
+                swapped = true;
+            }
+        }
+    } while (swapped);
+} //end of function
+
+//Team.prototype.newMethod = function {}
+
+// alert(localStorage.getItem("BigLeague")); //works
+       
+           var bigData = localStorage.getItem("BigLeague")
+           var bigDataObj = JSON.parse(bigData);
+             //for(var x in languages) {
+             for(var iTeamItem in bigDataObj) {
+               var iTeamObjObj = bigDataObj[iTeamItem]
+               console.log(iTeamObjObj) // => object, good
+               console.log(iTeamObjObj.team)
+               nameSort.push(iTeamObjObj.team)
+               //var iTeamObj = JSON.parse(iTeamObjObj)
+               //var iTeam = iTeamObjObj;
+               //for(var bitTeamItem in iTeam) {
+                // var bitTeam = iTeam[bitTeamItem]
+                // console.log(bitTeam.length + " bitTeam" + bitTeam.team);
+               // }//inner parse
+               }; //outer parse
+//console.log(localStorage.getItem("BigLeague"))
+//console.log(nameSort)
+bubbleSort(nameSort)
+if (window.localStorage.getItem("BigLeague")) {
+  for (var i = 0; i <= nameSort.length; i++) {
+             $("p.team:nth-child(" + (2+i) + ")").append("<span>"+ nameSort[i] +"</span>");
+             }; //end of for loop
+} //end of if check
+        var ClickCount = 0;
+     
+      var newTeam = $('input[type="submit"]').bind('click', function(event) {
+        ClickCount ++;
+      var nuTeam ={}
+       nuTeam.team = $('#teamName').val();
+       nuTeam.manager = $('#manager').val();
+       nuTeam.cell = $('#cell').val();
+       nuTeam.add1 = $('#add1').val();
+       nuTeam.add2 = $('#add2').val();
+       nuTeam.city = $('#city').val();
+       nuTeam.st = $('#st').val();
+       nuTeam.zip = $('#zip').val();
+       nuTeam.sponsor = $('#sponsor').val();
+       nuTeam.wins = 0;
+       nuTeam.losses = 0;
+        teams.push (new Team($('#teamName').val(), $('#manager').val(), $('#cell').val(), $('#add1').val(), $('#add2').val(), $('#city').val(), $('#st').val(), $('#zip').val(), $('#sponsor').val(), 0, 0));
+        localStorage.setItem("league "+nuTeam.team, JSON.stringify(nuTeam));
+        var data = localStorage.getItem("league "+nuTeam.team)
+        //teams.push (nuTeam)
+        console.log("league "+nuTeam.team, JSON.parse(data));
+        var thisTeam = ("league "+nuTeam.team, JSON.parse(data)).team
+        toBeSorted.push(thisTeam)
+        //console.log(("league "+nuTeam.team, JSON.parse(data)).sponsor)
+     event.preventDefault();
+        if (teams.length == 4) {
+          
+          bubbleSort(toBeSorted)
+          console.log(toBeSorted)
+          localStorage.setItem("BigLeague", JSON.stringify(teams))
+          for (var i = 0; i <= 3; i++) {
+             $("p.team:nth-child(" + (2+i) + ")").append("<span>"+ toBeSorted[i] +"</span>");
+             }; //end of for loop
+             $('.close-reveal-modal').click();
+             var bigData = localStorage.getItem("BigLeague")
+             //console.log(("BigLeague", JSON.parse(bigData)))
+             //console.log(JSON.parse(bigData)[2].team)
+             
+            
+
+        }
+
+           }); //end of function(event)
+           
+//new sked event
+var week; var gameNum; var hometeam; var visitorteam; var homescore; var visitorscore; var result;
+     var sked = new Array ();
+var game ={}
+  game.week = week;
+  game.gameNum = gameNum;
+  game.hometeam = hometeam;
+  game.vistorteam = visitorteam;
+  game.homescore = homescore;
+  game.visitorscore = visitorscore;
+  game.result = result;
+  
+//click event for two games.
+//sked.push (new game(game.week, game.gameNum, game.hometeam, game.visitorteam, game.homescore, game.visitorscore, game.result));
+//localStorage.setItem("game:" + game.week, JSON.stringify(sked))
+//if
+
+
+
+           
+       //console.log(nuTeam.team);
+       // console.log(teams)
+        //console.log(JSON.parse(localStorage.getItem(("league "+nuTeam.team + "&"))));
+        //console.log(JSON.parse(localStorage.getItem(("league "+nuTeam.team + "@").team)));
+//        var currObject = JSON.parse(localStorage.getItem(("league "+nuTeam.team).team));
+//        var myTim = localStorage.getItem('team');
+        //var taste = localStorage.getItem('favoriteflavor')
+        //text(JSON.parse(localStorage.getItem('key')))
+//        var load = function (a) {
+          //var data = JSON.parse(localStorage.getItem("league "+nuTeam.team));
+//          var data = localStorage.getItem("league "+nuTeam.team)
+          //console.log(data) //works
+          //var someProp = data.a; // gives you 'bar'
+//          return data.a;
+//          };
+//          var mine = load("sponsor")
+//        console.log(mine);
+    
+     //localStorage.setItem( 'car', JSON.stringify(car) )
+      //   function init(i) {
+       // if(localStorage.length>=1) {
+      //      $('#teamName' + ClickCount).append("<li>"+localStorage['name' + ClickCount]+"</li>"+"<li>0</li>" + "<li>0</li>" + "<li>0%</li>");
+      //}
+//      var baSize = bigArray.length
+      //console.log(bigArray[0].team)
+      
+//                if (baSize == 4) {  
+            //var sorted = bubbleSort("cat", "dog", "cougar", "tiger");
+//            var myTeams = [bigArray[0].team, bigArray[1].team, bigArray[2].team, bigArray[3].team]
+//            var sorted = bubbleSort(myTeams)
+//            console.log(myTeams)
+            //console.log(sorted) //doesn't work
+//          for (var i = 0; i <= 3; i++) {
+//            $("p.team:nth-child(" + (2+i) + ")").append("<span>"+ myTeams[i] +"</span>");
+//            }; //end of for loop
+//            $('.close-reveal-modal').click();
+//          }; //end of if statement
+          
+
+    
+   //  console.log(myTest);
+   // console.log(bigArray);
+   // console.log(bigArray.length);
+   // console.log(bigArray[0].team);
+       
+    
+ }); //end of jquery
+
+</script>
+</head>
+
+<body>
+<div id="headerbox">
+<header>
+<div id="navigation_horiz">
+<ul id="nav">
+<li>
+					<a href="samsoftball2b.html#topbox"><h1>SUPER SOFTBALL LEAGUE</h1></a>
+          <a><img src="downarrow.jpg" style="border:none; padding-left:70px; width: 20px; height: 20px"></img></a>
+					<div id="dropdown_one" class="dropdown">
+						
+<a href="samsoftball2b.html#box1">STANDINGS</a><br>
+<a href="samsoftball2b.html#box3">SCHEDULE</a><br>
+</div><!--<div id="dropdown_one"-->
+				</li>
+
+</ul>
+</div><!--/id="navigation_horiz">-->
+</header>
+
+<img src="banner.png"/>
+<div style="clear: both;"></div>
+
+</div>
+<div id="content">
+
+
+<div id="box1">
+	<h2>Standings</h2>
+<div id="box2">	
+
+<div id="team">
+<h3>Team</h3>
+<p class="team"></p>
+<p class="team"></p>
+<p class="team"></p>
+<p class="team"></p>
+</div>
+<div id="win">
+<h3>Wins</h3>
+<p class="win"></p>
+<p class="win"></p>
+<p class="win"></p>
+<p class="win"></p>
+</div>
+<div id="lose">
+<h3>Loses</h3>
+<p class="lose"></p>
+<p class="lose"></p>
+<p class="lose"></p>
+<p class="lose"></p>
+</div>
+<div id="percent">
+<h3>Percentage</h3>
+<p class="percent"></p>
+<p class="percent"></p>
+<p class="percent"></p>
+<p class="percent"></p>
+</div>
+<div style="clear: both;"></div>
+
+</div><!--/box2-->
+</div><!--/box1-->
+
+<div id="box3">
+	<h2>Schedule</h2>
+<div id="box4">
+
+<div id="week">
+<h3>Week 1</h3>
+<p class="row2">Some event</p>
+<p class="row2"></p>
+</div>
+<div id="week">
+<h3>Week 2</h3>
+<p class="row2">Some event</p>
+<p class="row2"></p>
+</div>
+<div id="week">
+<h3>Week 3</h3>
+<p class="row2">Some event</p>
+<p class="row2"></p>
+</div>
+<div id="week">
+<h3>Week 4</h3>
+<p class="row2">Some event</p>
+<p class="row2"></p>
+</div>
+<div id="week">
+<h3>Week 5</h3>
+<p class="row2">Some event</p>
+<p class="row2"></p>
+</div>
+<div id="week">
+<h3>Week 6</h3>
+<p class="row2">Some event</p>
+<p class="row2"></p>
+</div>
+<div style="clear: both;"></div>
+</div><!--/box4-->
+</div><!--/box3-->
+
+<a id= "submitbutton" href="samsoftball2b.html#" data-reveal-id="myModal">Add Team</a>
+<div id="myModal" class="reveal-modal">
+			<a href="samsoftball2b.html#"></a>
+			<div align="left" id="myForm">
+  <header class="myhead">
+    
+  </header>
+    
+  
+        <form action="http://www.nashvillesoftwareschool.com/ftp/campbellm/Softball%20League/newTeam" method="post" target="_self" id="myTeam" name="myTeam">
+    <fieldset>
+      <legend>Team info</legend>
+      <ol>
+       <li>
+         <label for"team">Team name:<em>*</em></label><br />
+         <input name="teamName" id="teamName" class="stored" type="text" value="Your team name here" size="50" maxlength="255" class="required"/>
+       </li>
+       <li>
+         <label for"manager">Manager name:<em>*</em></label><br />
+         <input name="manager" id="manager" class="stored" type="text" value="Mgr's name here" size="50" maxlength="255" class="required"/>
+       </li>  
+       <li>
+         <label for"cell">Mgr cell number:<em>*</em></label><br />
+         <input name="cell" id="cell" class="stored" type="text" value="xxx-xxx-xxxx" size="50" maxlength="12" required="required"/>
+       </li>  
+       <li>
+         <label for"add1">Mgr street address 1:<em>*</em></label><br />
+         <input name="add1" id="add1" class="stored" type="text" value="Main address here" size="50" maxlength="155" required="required"/>
+       </li>  
+       <li>
+         <label for"add2">Mgr street address 2:</label><br />
+         <input name="add2" id="add2" class="stored" type="text" value="Secondary address here" size="50" maxlength="155"/>
+       </li>  
+       <li>
+         <label for"city">Mgr city:<em>*</em></label><br />
+         <input name="city" id="city" class="stored" type="text" value="City address here" size="50" maxlength="155" required="required"/>
+       </li>  
+       <li>
+         <label for"st">Mgr state:<em>*</em></label><br />
+         <input name="st" id="st" class="stored" type="text" value="St" size="50" maxlength="2" required="required"/>
+       </li>  
+       <li>
+         <label for"zip">Mgr ZIP:<em>*</em></label><br />
+         <input name="zip" id="zip" class="stored" type="text" value="ZIP add" size="50" maxlength="10" required="required"/>
+       </li>  
+       <li>
+         <label for"sponsor">Team sponsor:</label><br />
+         <input name="sponsor" id="sponsor" class="stored" type="text" value="Sponsor name here" size="50" maxlength="155"/>
+       </li>  
+      </ol>
+      </fieldset>
+      
+      <fieldset>
+        <legend>Credit card info</legend>
+          <ol>
+            <li>
+              <label for"teamCard">Card type:<em>*</em></label>            
+              <input name="teamCard" id="teamCard" class="stored" type="radio" value="Visa" checked="" />Visa<br />
+              <input name="teamCard" id="teamCard" class="stored" type="radio" value="MasterCar"  />MasterCard<br />
+              <input name="teamCard" id="teamCard" class="stored" type="radio" value="AmEx"  />AmEx<br />
+            </li>
+            
+            <li>
+              <label for"teamCardNo">Card number:<em>*</em></label><br />
+              <input name="teamCardNo" id="teamCardNo" class="stored" type="text" value="XXXX-XXXX-XXXX-XXXX" size="19" maxlength="19" required="required"/>
+            </li>
+            <li>
+              <label for"teamCardExp">Card expiry:<em>*</em></label><br />
+              <input name="teamCardExp" id="teamCardExp" class="stored" type="text" value="XX/XX" size="5" maxlength="5" required="required"/>
+            </li>
+             
+          </ol>
+      </fieldset>
+      
+      <fieldset>
+       <input  name="newTeam" value="New team" type="submit" />
+        <p><em>*</em>  indicates required.</p>
+      </fieldset>
+    </form>
+  
+  
+  
+  
+  
+    
+</div> <!--container -->
+
+<a class="close-reveal-modal">x</a>
+</div><!--/content-->
+
+</body>
+</html>

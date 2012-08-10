@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Leagueplay:Setup teams</title>
+	<link rel="stylesheet" type="text/css" href="css/leaguePlay.css" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+	<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
+	<script> 
+      $(document).ready(function() {
+      //$("#myTeam").validate({
+      //debug: true
+      //  rules: {
+      //    teamName: "required",
+      //    managerName: "required"
+      //  },
+      //  messages: {
+      //    teamName: "Cannot be empty",
+      //    managerName: "Can't be blank"
+      //  }
+      //});
+      
+      $(':text:first').focus();
+      $("#myTeam").validate();
+      
+    var Team = function(team, manager, cell, add1, add2, city, st, zip, sponsor) {
+      this.team = team;
+      this.manager = manager;
+      this.cell = cell;
+      this.add1 = add1;
+      this.add2 = add2;
+      this.city = city;
+      this.st = st;
+      this.zip = zip;
+      this.sponsor = sponsor;
+      this.runName = function () {
+        return this.team;
+      }
+    };
+    
+     var bigArray = new Array ();
+      // bigArray = bigArray + new Team()
+     //$('teamName').val()
+     
+     
+      var newTeam = $('input[type="submit"]').bind('click', function(event) {
+        var myTest = $("#teamName").val();
+        bigArray.push (new Team($('#teamName').val(), $('#managerName').val(), $('#mgrCell').val(), $('#mgrAddySt1').val(), $('#mgrAddySt2').val(), $('#mgrAddyCity').val(), $('#mgrAddySt').val(), $('#mgrAddyZIP').val(), $('#teamSponsor').val()));
+     event.preventDefault();    
+     console.log(myTest);
+    console.log(bigArray);
+    console.log(bigArray.length);
+    console.log(bigArray[0].team);
+    if bigArray.length == 4;
+    //your code to append team names here
+    });
+
+});
+</script>
+</head>
+<body>
+<div align="left" id="myForm">
+  <header class="myhead">
+    
+  </header>
+    
+  
+    <form action="newTeam" method="post" target="_self" id="myTeam" name="myTeam">
+    <fieldset>
+      <legend>Team info</legend>
+      <ol>
+       <li>
+         <label for"teamName">Team name:<em>*</em></label><br />
+         <input name="teamName" id="teamName" type="text" value="Your team name here" size="50" maxlength="255" class="required"/>
+       </li>
+       <li>
+         <label for"managerName">Manager name:<em>*</em></label><br />
+         <input name="managerName" id="managerName" type="text" value="Mgr's name here" size="50" maxlength="255" class="required"/>
+       </li>  
+       <li>
+         <label for"mgrCell">Mgr cell number:<em>*</em></label><br />
+         <input name="mgrCell" id="mgrCell" type="text" value="xxx-xxx-xxxx" size="50" maxlength="12" required="required"/>
+       </li>  
+       <li>
+         <label for"mgrAddySt1">Mgr street address 1:<em>*</em></label><br />
+         <input name="mgrAddySt1" id="mgrAddySt1" type="text" value="Main address here" size="50" maxlength="155" required="required"/>
+       </li>  
+       <li>
+         <label for"mgrAddySt2">Mgr street address 2:</label><br />
+         <input name="mgrAddySt2" id="mgrAddySt2" type="text" value="Secondary address here" size="50" maxlength="155"/>
+       </li>  
+       <li>
+         <label for"mgrAddyCity">Mgr city:<em>*</em></label><br />
+         <input name="mgrAddyCity" id="mgrAddyCity" type="text" value="City address here" size="50" maxlength="155" required="required"/>
+       </li>  
+       <li>
+         <label for"mgrAddySt">Mgr state:<em>*</em></label><br />
+         <input name="mgrAddySt" id="mgrAddySt" type="text" value="State address here" size="50" maxlength="2" required="required"/>
+       </li>  
+       <li>
+         <label for"mgrAddyZip">Mgr ZIP:<em>*</em></label><br />
+         <input name="mgrAddyZip" id="mgrAddyZip" type="text" value="ZIP address here" size="50" maxlength="10" required="required"/>
+       </li>  
+       <li>
+         <label for"teamSponsor">Team sponsor:</label><br />
+         <input name="teamSponsor" id="teamSponsor" type="text" value="Sponsor name here" size="50" maxlength="155"/>
+       </li>  
+      </ol>
+      </fieldset>
+      
+      <fieldset>
+        <legend>Credit card info</legend>
+          <ol>
+            <li>
+              <label for"teamCard">Card type:<em>*</em></label>            
+              <input name="teamCard" id="teamCard" type="radio" value="Visa" checked="" />Visa<br />
+              <input name="teamCard" id="teamCard" type="radio" value="Visa"  />MasterCard<br />
+              <input name="teamCard" id="teamCard" type="radio" value="Visa"  />AmEx<br />
+            </li>
+            
+            <li>
+              <label for"teamCardNo">Card number:<em>*</em></label><br />
+              <input name="teamCardNo" type="text" value="XXXX-XXXX-XXXX-XXXX" size="19" maxlength="19" required="required"/>
+            </li>
+            <li>
+              <label for"teamCardExp">Card expiry:<em>*</em></label><br />
+              <input name="teamCardExp" type="text" value="XX/XX" size="5" maxlength="5" required="required"/>
+            </li>
+             
+          </ol>
+      </fieldset>
+      
+      <fieldset>
+        <input name="newTeam" value="New team" type="submit" />
+        <p><em>*</em>  indicates required.</p>
+      </fieldset>
+    </form>
+  
+  
+  
+  
+  
+    
+</div> <!--container -->
+
+</body>
+</html>
